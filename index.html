@@ -1,25 +1,124 @@
-<body class="page-wrap">
-  <header class="site-header">
-    <div class="container row">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Celeste (Claire) Wang — Data & Business Analytics</title>
+  <meta name="description" content="Portfolio of Celeste (Claire) Wang — Data & Business Analyst. SQL, Python, Power BI, Tableau. Growth & KPI dashboards, churn analysis, funnel analytics." />
+  <link rel="canonical" href="https://celeste.alnx.tech/" />
+  <style>
+    /* --- Design tokens --- */
+    :root{
+      --bg: #0b0b0d;
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --dim: rgba(255,255,255,.55);
+      --brand-1: #f0c96a;
+      --brand-2: #d4a83b;
+      --brand-3: #8a6a1e;
+      --card-bg: rgba(255,255,255,0.06);
+      --card-stroke: 1px solid rgba(255,255,255,0.08);
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --page-max: 1120px;                 /* 1000–1280 都可 */
+      --page-pad: clamp(16px, 4vw, 40px); /* 自适应两侧留白 */
+    }
+
+    /* --- Reset & base --- */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); background:var(--bg); overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    h1,h2,h3{margin:0 0 .6rem 0; line-height:1.2}
+    h1{font-size: clamp(26px, 3.2vw, 36px)}
+    h2{font-size: clamp(20px, 2.4vw, 28px)}
+    p{margin:0 0 .8rem 0}
+
+    /* --- Layout helpers --- */
+    .container{max-width:var(--page-max); margin-inline:auto; padding-inline:var(--page-pad)}
+    .page{min-height:100dvh; display:flex; flex-direction:column}
+
+    /* --- Header / Nav --- */
+    header{position:sticky; top:0; z-index:20; background:linear-gradient(180deg, rgba(11,11,13,.9), rgba(11,11,13,.6) 60%, rgba(11,11,13,0)); backdrop-filter:saturate(140%) blur(6px)}
+    .header-row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block: clamp(14px, 2.4vh, 22px)}
+
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand-dot{width:32px; height:32px; border-radius:50%; background:radial-gradient(ellipse at 35% 35%, var(--brand-1) 0%, var(--brand-2) 55%, var(--brand-3) 100%); box-shadow:0 0 18px rgba(240,201,106,.25)}
+    .brand-name{font-weight:700; letter-spacing:.2px}
+
+    .nav{display:flex; gap:20px; align-items:center}
+    .nav a{opacity:.9; transition:opacity .2s ease}
+    .nav a:hover{opacity:1}
+
+    /* mobile nav */
+    .menu-btn{display:none; border:0; background:#1a1a1f; color:var(--text); padding:8px 10px; border-radius:10px}
+    @media (max-width: 720px){
+      .nav{display:none}
+      .menu-btn{display:inline-flex}
+      .nav.open{display:flex; position:absolute; right:var(--page-pad); top:58px; flex-direction:column; gap:10px; background:#111318; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow)}
+    }
+
+    /* --- Hero / intro --- */
+    .hero{padding-block: clamp(24px, 8vh, 84px)}
+    .hero .lead{font-size: clamp(16px, 2.1vw, 18px); color:var(--muted)}
+
+    /* --- Main grid: left text / right card --- */
+    .grid{display:grid; grid-template-columns: 1.35fr 1fr; gap: clamp(16px, 3.5vw, 40px)}
+    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+
+    /* --- Card --- */
+    .card{background:var(--card-bg); border:var(--card-stroke); border-radius:var(--radius); padding: clamp(16px, 3vw, 28px); box-shadow:var(--shadow); backdrop-filter: blur(6px)}
+    .card ul{margin:10px 0 0 0; padding-left:18px}
+    .card li{margin:6px 0; line-height:1.45}
+
+    .legend{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:14px}
+    .chip{display:inline-flex; align-items:center; gap:8px}
+    .swatch{width:36px; height:10px; border-radius:6px; background:#666}
+    .swatch.org{background:#e2c14d}
+    .swatch.paid{background:#43c06a}
+    .swatch.ref{background:#78a9ff}
+    .swatch.dir{background:#555}
+
+    /* --- Sections --- */
+    section{scroll-margin-top:80px}
+    .section{padding-block: clamp(40px, 9vh, 100px)}
+
+    /* --- Footer --- */
+    footer{padding:26px 0 40px; color:var(--dim)}
+  </style>
+</head>
+<body class="page">
+  <!-- Header / nav -->
+  <header>
+    <div class="container header-row">
       <div class="brand">
-        <span class="dot"></span>
-        <div class="name">Celeste (Claire) Wang</div>
+        <span class="brand-dot" aria-hidden="true"></span>
+        <div class="brand-name">Celeste (Claire) Wang</div>
       </div>
-      <nav class="nav">
+      <nav class="nav" id="nav">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button class="menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
     </div>
   </header>
 
-  <main class="main">
+  <main class="hero">
     <div class="container grid">
+      <!-- Left column -->
       <section id="about">
-        <!-- 左侧内容（简介/hero/一段 summary） -->
+        <h1>Data & Business Analytics</h1>
+        <p class="lead">I build growth‑ready analytics: KPI dashboards (MAU/DAU, funnels, anomaly alerts), cohort & retention models (SQL CTEs, window functions), and BI that partners with Marketing/BD to ship experiments and wins.</p>
+        <p class="lead">Previously @ Nurex Link LLC (SaaS/BI). 180+ data sources integrated; Power BI & Tableau; SQL/Python. MBA — Data Analytics.</p>
       </section>
 
+      <!-- Right column: Highlights card -->
       <aside class="card" id="highlights">
         <h2>Highlights</h2>
         <ul>
@@ -27,14 +126,56 @@
           <li>Designed SQL models with CTEs & window functions for cohorts, retention, and incremental loads.</li>
           <li>Partnered with Marketing/BD to translate insights into experiments and wins.</li>
         </ul>
-
-        <p style="opacity:.8;margin-top:10px">Resume available on request.</p>
-
-        <!-- 你的 Traffic/Lead Mix 图例 -->
-        <div class="legend">
-          <!-- 保留你原有的块元素即可 -->
+        <p style="opacity:.82; margin-top:10px">Resume available on request.</p>
+        <div class="legend" aria-label="Traffic / Lead Mix (demo)">
+          <div class="chip"><span class="swatch org"></span><span>Organic</span></div>
+          <div class="chip"><span class="swatch paid"></span><span>Paid</span></div>
+          <div class="chip"><span class="swatch ref"></span><span>Referral</span></div>
+          <div class="chip"><span class="swatch dir"></span><span>Direct</span></div>
         </div>
       </aside>
     </div>
   </main>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="container">
+      <h2>Skills</h2>
+      <p class="lead" style="color:var(--muted)">SQL (CTEs, windows), Python (Pandas, NumPy), Power BI, Tableau, dbt (basic), Salesforce CRM, A/B testing, funnel analytics, anomaly detection.</p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <div class="card" style="margin-top:14px">
+        <p><strong>Growth KPI Dashboard</strong> — end‑to‑end dashboard connecting product & marketing metrics; alerting pipeline and executive weekly.</p>
+        <p style="color:var(--dim)">Stack: SQL, Python, Power BI / Tableau · Role: design, modeling, delivery.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <div class="card" style="margin-top:14px">
+        <p>Open to Data/BI Analyst roles (onsite/hybrid — Bay Area & NYC; remote worldwide). IR/BD collaborations welcome.</p>
+        <p>Email: <a href="mailto:clairesiwang@alphalink.com">clairesiwang@alphalink.com</a> · LinkedIn: <a href="https://www.linkedin.com/in/clairesiwang" target="_blank" rel="noreferrer">/in/clairesiwang</a> · GitHub: <a href="https://github.com/clairesiwang" target="_blank" rel="noreferrer">@clairesiwang</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap">
+      <span>© <span id="y"></span> Celeste (Claire) Wang</span>
+      <span style="color:var(--dim)">Hosted on GitHub Pages</span>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
+</html>
