@@ -20,7 +20,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
   <style>
-    /* smooth scroll & nicer selection */
     html{ scroll-behavior:smooth; }
     ::selection{ background:#facc15; color:#000; }
     .glass{ background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); }
@@ -164,11 +163,13 @@
     <div class="mt-6 grid md:grid-cols-2 gap-6">
       <div class="card glass p-5">
         <div class="text-sm font-semibold mb-3" data-i18n="chart1_t">Monthly Users & Signups</div>
-        <div class="h-64"><canvas id="lineChart"></canvas></div>
+        <!-- CHANGED: add fixed height -->
+        <div class="h-64"><canvas id="lineChart" height="256"></canvas></div>
       </div>
       <div class="card glass p-5">
         <div class="text-sm font-semibold mb-3" data-i18n="chart2_t">Acquisition Split</div>
-        <div class="h-64"><canvas id="pieChart"></canvas></div>
+        <!-- CHANGED: add fixed height -->
+        <div class="h-64"><canvas id="pieChart" height="256"></canvas></div>
       </div>
     </div>
   </section>
@@ -307,46 +308,60 @@
     // year
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Charts
-    const lineCtx = document.getElementById('lineChart');
-    const pieCtx  = document.getElementById('pieChart');
+    // ---- Charts: robust init & fixed height ----
+    function initCharts(){
+      const lineEl = document.getElementById('lineChart');
+      const pieEl  = document.getElementById('pieChart');
+      if(!lineEl || !pieEl || !window.Chart) return;
 
-    const lineChart = new Chart(lineCtx, {
-      type: 'line',
-      data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-        datasets: [
-          { label: 'Users',   data: [120,150,210,280,340,390], borderColor: '#facc15', tension: 0.35 },
-          { label: 'Signups', data: [42,60,75,110,130,160],    borderColor: '#9ca3af', tension: 0.35 }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { labels: { color: '#e5e7eb' } }, tooltip: { intersect:false } },
-        scales: {
-          x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(255,255,255,0.06)' } },
-          y: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(255,255,255,0.06)' } }
+      const lineCtx = lineEl.getContext('2d');
+      const pieCtx  = pieEl.getContext('2d');
+
+      // destroy previous if hot reloaded
+      if(window._lineChart) window._lineChart.destroy();
+      if(window._pieChart)  window._pieChart.destroy();
+
+      window._lineChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+          datasets: [
+            { label: 'Users',   data: [120,150,210,280,340,390], borderColor: '#facc15', tension: 0.35, pointRadius: 0 },
+            { label: 'Signups', data: [42,60,75,110,130,160],    borderColor: '#9ca3af', tension: 0.35, pointRadius: 0 }
+          ]
         },
-        elements: { point: { radius: 0 } }
-      }
-    });
+        options: {
+          responsive: true,
+          maintainAspectRatio: false, // key for fixed-height containers
+          plugins: { legend: { labels: { color: '#e5e7eb' } }, tooltip: { intersect:false } },
+          scales: {
+            x: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+            y: { ticks: { color: '#cbd5e1' }, grid: { color: 'rgba(255,255,255,0.06)' } }
+          }
+        }
+      });
 
-    const pieChart = new Chart(pieCtx, {
-      type: 'pie',
-      data: {
-        labels: ['Organic','Paid','Referral','Direct'],
-        datasets: [{
-          data: [45,25,18,12],
-          backgroundColor: ['#facc15', '#a3a3a3', '#f59e0b', '#d4d4d4'],
-          borderColor: '#0b0b0b'
-        }]
-      },
-      options: {
-        plugins: { legend: { labels: { color: '#e5e7eb' } } }
-      }
-    });
+      window._pieChart = new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+          labels: ['Organic','Paid','Referral','Direct'],
+          datasets: [{
+            data: [45,25,18,12],
+            backgroundColor: ['#facc15', '#a3a3a3', '#f59e0b', '#d4d4d4'],
+            borderColor: '#0b0b0b'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#e5e7eb' } } }
+        }
+      });
+    }
+    if(document.readyState === 'complete') initCharts();
+    else window.addEventListener('load', initCharts);
 
-    // Simple EN/中文 toggle
+    // ---- Simple EN/中文 toggle (kept same) ----
     const zh = {
       nav_about:'关于我', nav_focus:'专长', nav_demo:'分析演示', nav_cases:'项目案例',
       nav_skills:'技能栈', nav_exp:'经历', nav_contact:'联系我',
@@ -364,4 +379,28 @@
       focus_c:'叙事表达', focus_c1:'指标 → 叙事 → 决策', focus_c2:'管理/销售节奏赋能', focus_c3:'数据契约与血缘',
       demo_t:'分析演示', chart1_t:'月度用户与注册', chart2_t:'获客渠道占比',
       cases_t:'项目案例',
-      case1_h:'180+_
+      case1_h:'180+ 数据源统一漏斗', case1_p:'构建 Power BI 看板，统一营销、产品与 CRM 数据；标准化指标与数据血缘；在数据治理与干预后，部分漏斗转化率约提升 35%。',
+      case1_c2:'数据契约与血缘', case1_c3:'漏斗治理 → 提升',
+      case2_h:'大规模 KPI 指标化', case2_p:'与业务线协作定义 KPI 与埋点，构建自助看板服务管理与运营节奏；显著缩短决策周期。',
+      case2_c2:'自助 KPI 门户', case2_c3:'运营/管理节奏',
+      skills_t:'技能栈', skill_story:'故事化表达',
+      exp_t:'经历',
+      contact_h:'一起做可度量的成果。', contact_p:'开放数据/BI 岗位（美国 Remote/Hybrid；新加坡/迪拜 On-site）。用数据支撑可被信任的决策。',
+      email_btn:'邮件联系', all_rights:'保留所有权利。'
+    };
+    const en = {};
+    const btn = document.getElementById('langBtn');
+    let current = 'en';
+    const setLang = (to) => {
+      const dict = (to === 'zh') ? zh : en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (to === 'zh' && zh[key]) el.textContent = zh[key];
+      });
+      btn.textContent = (to === 'zh') ? 'EN' : '中文';
+      current = to;
+    };
+    btn?.addEventListener('click', () => setLang(current === 'en' ? 'zh' : 'en'));
+  </script>
+</body>
+</html>
