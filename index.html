@@ -7,8 +7,6 @@
   <meta name="description" content="Portfolio of Celeste (Claire) Wang — Data & Business Analyst. SQL, Python, Power BI, Tableau. Growth & KPI dashboards, churn analysis, funnel analytics." />
   <meta name="author" content="Celeste (Claire) Wang" />
   <link rel="canonical" href="https://alnx.tech/" />
-  
-  <!-- Open Graph -->
   <meta property="og:title" content="Celeste (Claire) Wang — Data & Business Analytics" />
   <meta property="og:description" content="SQL · Python · Power BI · Tableau | Growth & KPI Insights | Portfolio & Contact" />
   <meta property="og:type" content="website" />
@@ -24,49 +22,99 @@
     "jobTitle": "Data & Business Analyst",
     "url": "https://alnx.tech/",
     "sameAs": [
-      "https://www.linkedin.com/in/",  
+      "https://www.linkedin.com/in/",
       "https://github.com/clairesiwang"
     ]
   }
   </script>
 
   <style>
-    :root { --bg:#0b0b0c; --panel:#121214; --text:#e8e6e3; --muted:#b3aea6; --gold:#d4af37; --accent:#8dc6ff; --card:#161618; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px; }
+    :root {
+      --bg:#0b0b0c; --panel:#121214; --text:#e8e6e3; --muted:#b3aea6;
+      --gold:#d4af37; --accent:#8dc6ff; --card:#161618;
+      --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px;
+    }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
     body{background:linear-gradient(180deg,var(--bg),#0e0e10 60%,#0b0b0c);color:var(--text)}
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1040px;margin:0 auto;padding:28px 20px 80px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 24px;position:sticky;top:0;background:rgba(11,11,12,.7);backdrop-filter:blur(8px);z-index:10}
+
+    /* 容器两侧自适应边距（不再贴边） */
+    .container{
+      max-width:1160px;
+      margin:0 auto;
+      padding:32px clamp(24px, 6vw, 64px) 96px;
+    }
+
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;
+      padding:12px 0 24px;position:sticky;top:0;background:rgba(11,11,12,.7);
+      backdrop-filter:blur(8px);z-index:10
+    }
     .brand{display:flex;align-items:center;gap:14px}
     .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--gold),#8e793e 60%,#403617);box-shadow:inset 0 0 20px rgba(0,0,0,.4),var(--shadow)}
     .title{font-size:18px;letter-spacing:.4px;font-weight:600}
     nav{display:flex;gap:18px}
     nav a{color:var(--text);opacity:.9}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:14px 0 28px}
-    .hero h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 14px}
+
+    .hero{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:18px 0 32px
+    }
+    .hero h1{
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.15;
+      margin:0 0 16px;
+      /* 控制行宽，视觉更高级 */
+      max-width:38ch;
+    }
     .hero p{color:var(--muted);font-size:18px;margin:0 0 20px}
     .badge{display:inline-block;padding:6px 12px;border:1px solid rgba(212,175,55,.4);color:var(--gold);border-radius:999px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px}
-    .card{background:linear-gradient(180deg,var(--card),#151418);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
-    .kpilist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .kpi{background:#141418;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px}
-    .kpi h3{margin:2px 0 4px;font-size:22px;color:var(--gold)}
+
+    .card{
+      background:linear-gradient(180deg,var(--card),#151418);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .kpilist{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .kpi{background:#141418;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
+    .kpi h3{margin:2px 0 6px;font-size:22px;color:var(--gold)}
     .kpi p{margin:0;color:var(--muted);font-size:12px}
-    section{margin-top:48px}
-    h2{font-size:22px;letter-spacing:.5px;margin:0 0 14px}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+
+    section{margin-top:56px}
+    h2{font-size:22px;letter-spacing:.5px;margin:0 0 18px}
+
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
     .col-6{grid-column:span 6}
     .col-4{grid-column:span 4}
+
     .pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;margin:6px 8px 0 0;font-size:12px;color:var(--muted)}
-    .proj{padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:#141418}
+
+    .proj{padding:20px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:#141418}
     .proj h3{margin:0 0 8px;font-size:18px}
     .proj p{margin:0 0 10px;color:var(--muted)}
     .proj a.btn{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:10px}
-    footer{margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    footer{
+      margin-top:64px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);
+      color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center
+    }
     .social{display:flex;gap:10px}
     .social a{color:var(--text);opacity:.9;border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px}
-    @media (max-width:860px){.hero{grid-template-columns:1fr}.kpilist{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.col-6,.col-4{grid-column:span 1}}
+
+    /* 画布自适应容器宽度，避免溢出 */
+    .viz canvas{display:block;width:100%;height:auto}
+
+    @media (max-width:860px){
+      .hero{grid-template-columns:1fr}
+      .kpilist{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .col-6,.col-4{grid-column:span 1}
+      .container{padding:24px 16px 72px}
+    }
   </style>
 </head>
 <body>
@@ -98,6 +146,7 @@
           <div class="kpi"><h3>&lt; 2h</h3><p>Refresh latency (BI)</p></div>
         </div>
       </div>
+
       <div class="card">
         <h2 style="margin-top:0">Highlights</h2>
         <ul>
@@ -106,30 +155,31 @@
           <li>Partnered with Marketing/BD to translate insights into experiments and wins.</li>
         </ul>
         <p style="margin-top:10px;color:var(--muted)">Resume available on request.</p>
-<div class="viz" style="margin-top:14px">
-  <h3 style="margin:0 0 8px;font-size:16px">Traffic / Lead Mix (demo)</h3>
-  <canvas id="leadMix" height="140" aria-label="Traffic and lead mix doughnut chart"></canvas>
-  <p style="margin:6px 0 0;color:var(--muted);font-size:12px">Synthetic demo · updates periodically</p>
-</div>        
+
+        <div class="viz" style="margin-top:14px">
+          <h3 style="margin:0 0 8px;font-size:16px">Traffic / Lead Mix (demo)</h3>
+          <canvas id="leadMix" height="140" aria-label="Traffic and lead mix doughnut chart"></canvas>
+          <p style="margin:6px 0 0;color:var(--muted);font-size:12px">Synthetic demo · updates periodically</p>
+        </div>
       </div>
     </section>
 
     <section id="about">
       <h2>About</h2>
       <div class="grid">
+        <!-- 修正多余 </p> -->
         <div class="col-6 card">
           <p>
-    I turn <span style="color:var(--gold)">complex data → clear metrics → actionable plans</span>.
-    At Baidu I supported ads & growth as a Business Analyst; at Nurex I design BI data models and dashboards.
-    I’m experienced in top-down KPI design, cross-functional collaboration, and landing metrics that teams actually use.
-  </p>
-  <p>
-    Current interests: automated data-quality monitoring, funnel attribution, retention & cohort analysis,
-    and <strong>AI-assisted analytics</strong>.
-  </p>
-</div>
-</p>
+            I turn <span style="color:var(--gold)">complex data → clear metrics → actionable plans</span>.
+            At Baidu I supported ads & growth as a Business Analyst; at Nurex I design BI data models and dashboards.
+            I’m experienced in top-down KPI design, cross-functional collaboration, and landing metrics that teams actually use.
+          </p>
+          <p>
+            Current interests: automated data-quality monitoring, funnel attribution, retention & cohort analysis,
+            and <strong>AI-assisted analytics</strong>.
+          </p>
         </div>
+
         <div class="col-6 card">
           <h3 style="margin-top:0">Focus Areas</h3>
           <ul>
@@ -178,73 +228,25 @@
         </div>
       </div>
     </section>
-    <!-- ==== Demos (paste below the closing </section> of #projects) ==== -->
-<!-- Chart.js CDN (只引一次) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<section id="demos" class="card" style="margin-top:28px">
-  <h2>Live Demos</h2>
+    <!-- ==== Demos ==== -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <h3 style="margin:10px 0">Acquisition → Activation Funnel</h3>
-  <canvas id="funnel" height="120" aria-label="Acquisition to activation funnel"></canvas>
-  <p id="funnel-note" style="color:#c9c9c9;margin-top:6px"></p>
+    <section id="demos" class="card" style="margin-top:28px">
+      <h2>Live Demos</h2>
 
-  <h3 style="margin:18px 0 8px">Monthly Cohort Retention</h3>
-  <div id="cohort" style="display:grid;grid-template-columns:repeat(10,56px);gap:4px;font-size:12px"></div>
+      <h3 style="margin:10px 0">Acquisition → Activation Funnel</h3>
+      <canvas id="funnel" height="120" aria-label="Acquisition to activation funnel"></canvas>
+      <p id="funnel-note" style="color:#c9c9c9;margin-top:6px"></p>
 
-  <h3 style="margin:18px 0 8px">Churn Prediction (Threshold)</h3>
-  <input id="thr" type="range" min="0.1" max="0.9" step="0.05" value="0.5" />
-  <span id="thrval">0.50</span>
-  <div id="metrics" style="margin-top:6px;color:#c9c9c9"></div>
-</section>
+      <h3 style="margin:18px 0 8px">Monthly Cohort Retention</h3>
+      <div id="cohort" style="display:grid;grid-template-columns:repeat(10,56px);gap:4px;font-size:12px"></div>
 
-<script>
-/* ---- 1) Funnel ---- */
-const steps = ["Landing","Signup","Email Verify","Activation"];
-const counts = [12000, 4800, 3600, 2100]; // synthetic
-new Chart(document.getElementById("funnel"), {
-  type: "bar",
-  data: { labels: steps, datasets: [{ label:"Users", data: counts }]},
-  options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
-});
-const drops = counts.slice(0,-1).map((v,i)=>((v-counts[i+1])/v*100).toFixed(1));
-const maxDropIdx = drops.indexOf(Math.max(...drops.map(Number)).toFixed(1));
-document.getElementById("funnel-note").textContent =
-  `Biggest drop: ${steps[maxDropIdx]} → ${steps[maxDropIdx+1]} (${drops[maxDropIdx]}%).`;
-
-/* ---- 2) Cohort heatmap ---- */
-const months = ["Cohort","M1","M2","M3","M4","M5","M6","M7","M8","M9"];
-const data = [
-  ["2024-01",100,62,55,48,45,42,40,38,36],
-  ["2024-02",100,64,56,49,46,43,41,39,37],
-  ["2024-03",100,66,58,52,49,47,45,44,42]
-]; // %
-const grid = document.getElementById("cohort");
-months.forEach(h=>{ const c=document.createElement("div"); c.textContent=h; c.style.color="#c9c9c9"; grid.appendChild(c);});
-data.forEach(row=>{
-  row.forEach((v,i)=>{
-    const cell=document.createElement("div"); cell.style.textAlign="center"; cell.style.padding="6px 0";
-    if(i===0){ cell.textContent=row[0]; cell.style.color="#c9c9c9"; }
-    else { cell.textContent = v+"%"; const t=v/100; cell.style.background=`rgba(107,255,122,${0.15+0.6*t})`; cell.style.borderRadius="6px"; }
-    grid.appendChild(cell);
-  });
-});
-
-/* ---- 3) Churn threshold demo ---- */
-const scores=[0.9,0.8,0.7,0.65,0.6,0.55,0.5,0.45,0.4,0.35,0.3,0.2];
-const y=[1,1,1,0,1,0,0,0,0,0,0,0];
-function evaluate(t){
-  let tp=0,fp=0,fn=0,tn=0;
-  scores.forEach((s,i)=>{ const p = s>=t?1:0; if(p&&y[i])tp++; else if(p&&!y[i])fp++; else if(!p&&y[i])fn++; else tn++; });
-  const prec = tp/(tp+fp||1), rec = tp/(tp+fn||1), f1 = 2*prec*rec/(prec+rec||1);
-  document.getElementById("metrics").innerHTML =
-    `TP:${tp} FP:${fp} FN:${fn} TN:${tn} · Precision:${prec.toFixed(2)} · Recall:${rec.toFixed(2)} · F1:${f1.toFixed(2)}`;
-}
-const slider=document.getElementById("thr"); const show=document.getElementById("thrval");
-slider.addEventListener("input",()=>{ show.textContent=Number(slider.value).toFixed(2); evaluate(Number(slider.value));});
-evaluate(0.5);
-</script>
-<!-- ==== /Demos ==== -->
+      <h3 style="margin:18px 0 8px">Churn Prediction (Threshold)</h3>
+      <input id="thr" type="range" min="0.1" max="0.9" step="0.05" value="0.5" />
+      <span id="thrval">0.50</span>
+      <div id="metrics" style="margin-top:6px;color:#c9c9c9"></div>
+    </section>
 
     <section id="contact">
       <h2>Contact</h2>
@@ -265,35 +267,79 @@ evaluate(0.5);
     </footer>
   </div>
 
+  <!-- Year -->
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 
+  <!-- Charts -->
   <script>
-(function(){
-  function ensureChart(cb){
-    if (window.Chart) return cb();
-    const s=document.createElement('script');
-    s.src='https://cdn.jsdelivr.net/npm/chart.js';
-    s.onload=cb;
-    document.head.appendChild(s);
-  }
-  ensureChart(function(){
+  // Doughnut (hero)
+  (function(){
     const el=document.getElementById('leadMix');
-    if(!el) return;
+    if(!el || !window.Chart) return;
     const palette=['#d4af37','#6BFF7A','#8dc6ff','#444444'];
     let data=[42,25,18,15];
     const chart=new Chart(el,{type:'doughnut',
       data:{labels:['Organic','Paid','Referral','Direct'],
             datasets:[{data,backgroundColor:palette,borderWidth:0}]},
-      options:{responsive:true,cutout:'62%',
-        plugins:{legend:{display:true,labels:{color:getComputedStyle(document.documentElement).getPropertyValue('--text')||'#fff'}}},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'62%',
+        plugins:{legend:{labels:{color:getComputedStyle(document.documentElement).getPropertyValue('--text')||'#fff'}}},
         animation:{duration:900,easing:'easeOutQuart'}}});
-    setInterval(()=>{ const jitter=data.map(v=>Math.max(5, v+(Math.random()*4-2)));
+    setInterval(()=>{
+      const jitter=data.map(v=>Math.max(5, v+(Math.random()*4-2)));
       const sum=jitter.reduce((a,b)=>a+b,0); data=jitter.map(v=>+(v/sum*100).toFixed(1));
       chart.data.datasets[0].data=data; chart.update('active'); },3500);
-  });
-})();
-</script>
+  })();
 
+  // 1) Funnel bar
+  (function(){
+    const steps=["Landing","Signup","Email Verify","Activation"];
+    const counts=[12000,4800,3600,2100]; // synthetic
+    new Chart(document.getElementById("funnel"), {
+      type: "bar",
+      data: { labels: steps, datasets: [{ label:"Users", data: counts }]},
+      options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+    });
+    const drops = counts.slice(0,-1).map((v,i)=>((v-counts[i+1])/v*100).toFixed(1));
+    const maxDropIdx = drops.indexOf(Math.max(...drops.map(Number)).toFixed(1));
+    document.getElementById("funnel-note").textContent =
+      `Biggest drop: ${steps[maxDropIdx]} → ${steps[maxDropIdx+1]} (${drops[maxDropIdx]}%).`;
+  })();
+
+  // 2) Cohort heatmap
+  (function(){
+    const months=["Cohort","M1","M2","M3","M4","M5","M6","M7","M8","M9"];
+    const data=[
+      ["2024-01",100,62,55,48,45,42,40,38,36],
+      ["2024-02",100,64,56,49,46,43,41,39,37],
+      ["2024-03",100,66,58,52,49,47,45,44,42]
+    ];
+    const grid=document.getElementById("cohort");
+    months.forEach(h=>{ const c=document.createElement("div"); c.textContent=h; c.style.color="#c9c9c9"; grid.appendChild(c);});
+    data.forEach(row=>{
+      row.forEach((v,i)=>{
+        const cell=document.createElement("div"); cell.style.textAlign="center"; cell.style.padding="6px 0";
+        if(i===0){ cell.textContent=row[0]; cell.style.color="#c9c9c9"; }
+        else { cell.textContent = v+"%"; const t=v/100; cell.style.background=`rgba(107,255,122,${0.15+0.6*t})`; cell.style.borderRadius="6px"; }
+        grid.appendChild(cell);
+      });
+    });
+  })();
+
+  // 3) Churn threshold demo
+  (function(){
+    const scores=[0.9,0.8,0.7,0.65,0.6,0.55,0.5,0.45,0.4,0.35,0.3,0.2];
+    const y=[1,1,1,0,1,0,0,0,0,0,0,0];
+    const slider=document.getElementById("thr"); const show=document.getElementById("thrval");
+    const m=document.getElementById("metrics");
+    function evaluate(t){
+      let tp=0,fp=0,fn=0,tn=0;
+      scores.forEach((s,i)=>{ const p = s>=t?1:0; if(p&&y[i])tp++; else if(p&&!y[i])fp++; else if(!p&&y[i])fn++; else tn++; });
+      const prec=tp/(tp+fp||1), rec=tp/(tp+fn||1), f1=2*prec*rec/(prec+rec||1);
+      m.innerHTML = `TP:${tp} FP:${fp} FN:${fn} TN:${tn} · Precision:${prec.toFixed(2)} · Recall:${rec.toFixed(2)} · F1:${f1.toFixed(2)}`;
+    }
+    slider.addEventListener("input",()=>{ show.textContent=Number(slider.value).toFixed(2); evaluate(Number(slider.value));});
+    evaluate(0.5);
+  })();
+  </script>
 </body>
 </html>
-
