@@ -1,181 +1,459 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Celeste (Claire) Wang — Data & Business Analytics</title>
-  <meta name="description" content="Portfolio of Celeste (Claire) Wang — Data & Business Analyst. SQL, Python, Power BI, Tableau. Growth & KPI dashboards, churn analysis, funnel analytics." />
-  <link rel="canonical" href="https://celeste.alnx.tech/" />
-  <style>
-    /* --- Design tokens --- */
-    :root{
-      --bg: #0b0b0d;
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --dim: rgba(255,255,255,.55);
-      --brand-1: #f0c96a;
-      --brand-2: #d4a83b;
-      --brand-3: #8a6a1e;
-      --card-bg: rgba(255,255,255,0.06);
-      --card-stroke: 1px solid rgba(255,255,255,0.08);
-      --radius: 18px;
-      --shadow: 0 10px 30px rgba(0,0,0,.25);
-      --page-max: 1120px;                 /* 1000–1280 都可 */
-      --page-pad: clamp(16px, 4vw, 40px); /* 自适应两侧留白 */
-    }
+import React, { useState } from "react";
 
-    /* --- Reset & base --- */
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--text); background:var(--bg); overflow-x:hidden;
-    }
-    a{color:inherit; text-decoration:none}
-    h1,h2,h3{margin:0 0 .6rem 0; line-height:1.2}
-    h1{font-size: clamp(26px, 3.2vw, 36px)}
-    h2{font-size: clamp(20px, 2.4vw, 28px)}
-    p{margin:0 0 .8rem 0}
+// Single-file React component for a bilingual (EN/中文) personal site
+// TailwindCSS ready. Clean, minimal, black–gold aesthetic.
+// Drop into a React project with Tailwind enabled. Exports a default component.
+// Replace placeholder links (resume, email, socials) with your real ones.
 
-    /* --- Layout helpers --- */
-    .container{max-width:var(--page-max); margin-inline:auto; padding-inline:var(--page-pad)}
-    .page{min-height:100dvh; display:flex; flex-direction:column}
+export default function PersonalSite() {
+  const [lang, setLang] = useState<'en' | 'zh'>('en');
 
-    /* --- Header / Nav --- */
-    header{position:sticky; top:0; z-index:20; background:linear-gradient(180deg, rgba(11,11,13,.9), rgba(11,11,13,.6) 60%, rgba(11,11,13,0)); backdrop-filter:saturate(140%) blur(6px)}
-    .header-row{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block: clamp(14px, 2.4vh, 22px)}
+  const t = (en: string, zh: string) => (lang === 'en' ? en : zh);
 
-    .brand{display:flex; align-items:center; gap:12px}
-    .brand-dot{width:32px; height:32px; border-radius:50%; background:radial-gradient(ellipse at 35% 35%, var(--brand-1) 0%, var(--brand-2) 55%, var(--brand-3) 100%); box-shadow:0 0 18px rgba(240,201,106,.25)}
-    .brand-name{font-weight:700; letter-spacing:.2px}
+  const nav = [
+    { id: 'about', label: t('About', '关于我') },
+    { id: 'focus', label: t('Focus', '专长') },
+    { id: 'cases', label: t('Case Studies', '项目案例') },
+    { id: 'skills', label: t('Skills', '技能栈') },
+    { id: 'experience', label: t('Experience', '经历') },
+    { id: 'contact', label: t('Contact', '联系我') },
+  ];
 
-    .nav{display:flex; gap:20px; align-items:center}
-    .nav a{opacity:.9; transition:opacity .2s ease}
-    .nav a:hover{opacity:1}
+  const metrics = [
+    { value: '8+', labelEn: 'years exp', labelZh: '年经验' },
+    { value: '180+', labelEn: 'data sources integrated', labelZh: '整合数据源' },
+    { value: '35%', labelEn: 'conv. lift (select funnels)', labelZh: '转化提升（选定漏斗）' },
+    { value: '3', labelEn: 'core tracks: DA · BD/IR · Web3', labelZh: '三主线：数据 · BD/IR · Web3' },
+  ];
 
-    /* mobile nav */
-    .menu-btn{display:none; border:0; background:#1a1a1f; color:var(--text); padding:8px 10px; border-radius:10px}
-    @media (max-width: 720px){
-      .nav{display:none}
-      .menu-btn{display:inline-flex}
-      .nav.open{display:flex; position:absolute; right:var(--page-pad); top:58px; flex-direction:column; gap:10px; background:#111318; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow)}
-    }
+  const focusCards = [
+    {
+      titleEn: 'Data / BI Analytics',
+      titleZh: '数据 / 商业智能',
+      bulletsEn: [
+        'SQL · Python (Pandas/NumPy) · Power BI · Tableau',
+        'KPI dashboards, funnel & churn analysis, A/B testing',
+        'CRM/ERP data, pipeline hygiene, GTM telemetry',
+      ],
+      bulletsZh: [
+        'SQL · Python（Pandas/NumPy）· Power BI · Tableau',
+        'KPI 看板、漏斗/流失分析、A/B 测试',
+        'CRM/ERP 数据、销售漏斗治理、GTM 指标',
+      ],
+    },
+    {
+      titleEn: 'IR / BD',
+      titleZh: '投资者关系 / 商务拓展',
+      bulletsEn: [
+        'Investor communications, updates, and materials',
+        'Cross-border capital dialogues, light DD support',
+        'Storytelling: metrics → narrative → trust',
+      ],
+      bulletsZh: [
+        '投资者沟通、周/月度更新与材料制作',
+        '跨境资本对接，尽调辅助',
+        '故事化表达：指标 → 叙事 → 信任',
+      ],
+    },
+    {
+      titleEn: 'Web3 / DeFi Intelligence',
+      titleZh: 'Web3 / DeFi 洞察',
+      bulletsEn: [
+        'On-chain heuristics, airdrop/staking playbooks',
+        'DEX liquidity views, basic arbitrage structures',
+        'Research → systematize → iterate',
+      ],
+      bulletsZh: [
+        '链上启发式、空投/质押策略',
+        'DEX 流动性视角与基础套利结构',
+        '研究 → 结构化 → 迭代',
+      ],
+    },
+  ];
 
-    /* --- Hero / intro --- */
-    .hero{padding-block: clamp(24px, 8vh, 84px)}
-    .hero .lead{font-size: clamp(16px, 2.1vw, 18px); color:var(--muted)}
+  const cases = [
+    {
+      tagEn: 'Nurex Link — BI Platform',
+      tagZh: 'Nurex Link — 商业智能平台',
+      titleEn: 'Unified funnels across 180+ sources',
+      titleZh: '180+ 数据源统一漏斗',
+      bodyEn:
+        'Built Power BI dashboards unifying marketing, product, and CRM telemetry; standardized metrics and lineage; select funnels saw ~35% conversion lift after hygiene + interventions.',
+      bodyZh:
+        '构建 Power BI 看板，统一营销、产品与 CRM 数据；标准化核心指标与数据血缘；在数据治理与干预后，部分漏斗转化率约提升 35%。',
+      highlightsEn: ['Power BI · SQL · Python', 'Data contracts & lineage', 'Funnel hygiene → lift'],
+      highlightsZh: ['Power BI · SQL · Python', '数据契约与血缘', '漏斗治理 → 提升'],
+    },
+    {
+      tagEn: 'Baidu — Commercial Analytics',
+      tagZh: '百度 — 商业分析',
+      titleEn: 'KPI instrumentation at scale',
+      titleZh: '大规模 KPI 指标化',
+      bodyEn:
+        'Partnered with business units to define KPIs, instrument events, and build self-serve dashboards supporting exec and ops rhythms; accelerated decision cycles.',
+      bodyZh:
+        '与各业务线协作沉淀 KPI、埋点与自助看板，服务管理与运营节奏；显著缩短决策周期。',
+      highlightsEn: ['Tableau · SQL', 'Self-serve KPI portal', 'Ops/exec cadence'],
+      highlightsZh: ['Tableau · SQL', '自助 KPI 门户', '运营/管理节奏'],
+    },
+    {
+      tagEn: 'Tianshan Capital — IR/Analyst',
+      tagZh: '天善资本 — IR/分析',
+      titleEn: 'Investor updates & deal support',
+      titleZh: '投资者更新与交易支持',
+      bodyEn:
+        'Maintained investor briefs, drafted memos and pitch materials, and supported cross-border dialogues; improved response quality and speed.',
+      bodyZh:
+        '维护投资者简报，撰写备忘录与路演材料，支持跨境沟通；提升反馈质量与响应速度。',
+      highlightsEn: ['IR materials', 'Light DD', 'Cross-border comms'],
+      highlightsZh: ['IR 材料', '轻尽调', '跨境沟通'],
+    },
+  ];
 
-    /* --- Main grid: left text / right card --- */
-    .grid{display:grid; grid-template-columns: 1.35fr 1fr; gap: clamp(16px, 3.5vw, 40px)}
-    @media (max-width: 900px){ .grid{grid-template-columns:1fr} }
+  const skills = [
+    'SQL', 'Python', 'Pandas', 'NumPy', 'Power BI', 'Tableau', 'Excel/Sheets', 'Salesforce CRM', 'A/B Testing', 'ETL', 'API Integrations', 'Storytelling'
+  ];
 
-    /* --- Card --- */
-    .card{background:var(--card-bg); border:var(--card-stroke); border-radius:var(--radius); padding: clamp(16px, 3vw, 28px); box-shadow:var(--shadow); backdrop-filter: blur(6px)}
-    .card ul{margin:10px 0 0 0; padding-left:18px}
-    .card li{margin:6px 0; line-height:1.45}
+  const experience = [
+    {
+      company: 'Nurex Link LLC',
+      roleEn: 'Data Analyst',
+      roleZh: '数据分析师',
+      time: '2024.12 – Present',
+      pointsEn: [
+        'Integrated 180+ data sources into unified funnels and KPI views.',
+        'Built Power BI dashboards driving exec and GTM visibility.',
+        'Implemented hygiene on CRM pipelines; improved conversion on select funnels ~35%.',
+      ],
+      pointsZh: [
+        '整合 180+ 数据源形成统一漏斗与 KPI 视图。',
+        '构建 Power BI 看板，服务管理层与 GTM 可视化。',
+        '治理 CRM 管道；部分漏斗转化约提升 35%。',
+      ],
+    },
+    {
+      company: 'Baidu',
+      roleEn: 'Commercial Analytics',
+      roleZh: '商业分析',
+      time: '2019 – 2022',
+      pointsEn: [
+        'Partnered with BU stakeholders on KPI definitions & instrumentation.',
+        'Delivered Tableau dashboards and cohort/funnel analyses for growth.',
+        'Enabled faster decision cadence via self-serve analytics.',
+      ],
+      pointsZh: [
+        '与业务协作定义 KPI 与埋点。',
+        '交付 Tableau 看板与分群/漏斗分析，支撑增长。',
+        '以自助分析提升决策节奏。',
+      ],
+    },
+    {
+      company: 'BDP',
+      roleEn: 'BI Analyst',
+      roleZh: '商业智能分析师',
+      time: '2016 – 2018',
+      pointsEn: [
+        'Built foundational BI views, ETL routines, and reporting packs.',
+        'Collaborated with ops and finance for weekly KPI reviews.',
+      ],
+      pointsZh: [
+        '搭建基础 BI 视图、ETL 流程与报告包。',
+        '与运营、财务协作开展周度 KPI 评审。',
+      ],
+    },
+    {
+      company: 'ThreatBook (威胁猎人)',
+      roleEn: 'Data Security Analyst (short stint)',
+      roleZh: '数据安全分析（短期）',
+      time: '2018 – 2019',
+      pointsEn: [
+        'Assisted with security telemetry analysis and reporting.'
+      ],
+      pointsZh: [
+        '参与安全遥测数据分析与报告。'
+      ],
+    },
+    {
+      company: 'ByteDance (Volcano Engine)',
+      roleEn: 'Analytics Intern (short-term)',
+      roleZh: '分析实习生（短期）',
+      time: 'Late 2020',
+      pointsEn: [
+        'Contributed to instrumentation and data QA initiatives.'
+      ],
+      pointsZh: [
+        '参与埋点与数据质量工作。'
+      ],
+    },
+    {
+      company: 'Tianshan Capital',
+      roleEn: 'IR/Analyst Intern',
+      roleZh: 'IR/分析实习生',
+      time: 'Mid 2022',
+      pointsEn: [
+        'Drafted investor briefs and supported cross-border dialogues.'
+      ],
+      pointsZh: [
+        '撰写投资者简报并支持跨境沟通。'
+      ],
+    },
+    {
+      company: 'Webster University (MBA, Data Analytics track)',
+      roleEn: 'Graduate Study',
+      roleZh: '研究生学习（MBA，数据分析方向）',
+      time: '2023.04 – 2024.10',
+      pointsEn: [
+        'Coursework: data comms & infra, analytics, BI, strategy; IRIS² satellite networks paper.'
+      ],
+      pointsZh: [
+        '课程：数据通信与基础设施、数据分析、商业智能、战略；撰写 IRIS² 卫星网络论文。'
+      ],
+    },
+  ];
 
-    .legend{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:14px}
-    .chip{display:inline-flex; align-items:center; gap:8px}
-    .swatch{width:36px; height:10px; border-radius:6px; background:#666}
-    .swatch.org{background:#e2c14d}
-    .swatch.paid{background:#43c06a}
-    .swatch.ref{background:#78a9ff}
-    .swatch.dir{background:#555}
+  const publications = [
+    {
+      titleEn: 'Enhancing Risk Management and Resilience in Satellite Communications: A Case Study of the EU’s IRIS² Framework',
+      titleZh: '提升卫星通信风险管理与韧性：欧盟 IRIS² 框架案例研究',
+      date: '2025-07-27',
+      noteEn: 'MSBA 650 course paper (1,320 words).',
+      noteZh: 'MSBA 650 课程论文（1320字）。',
+      link: '#',
+    },
+  ];
 
-    /* --- Sections --- */
-    section{scroll-margin-top:80px}
-    .section{padding-block: clamp(40px, 9vh, 100px)}
+  const socials = [
+    { name: 'LinkedIn', href: 'https://www.linkedin.com/in/clairesiwang' },
+    { name: 'GitHub', href: 'https://github.com/clairesiwang' },
+    { name: 'YouTube', href: 'https://www.youtube.com/@alphanexus' },
+  ];
 
-    /* --- Footer --- */
-    footer{padding:26px 0 40px; color:var(--dim)}
-  </style>
-</head>
-<body class="page">
-  <!-- Header / nav -->
-  <header>
-    <div class="container header-row">
-      <div class="brand">
-        <span class="brand-dot" aria-hidden="true"></span>
-        <div class="brand-name">Celeste (Claire) Wang</div>
-      </div>
-      <nav class="nav" id="nav">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <button class="menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('nav').classList.toggle('open')">Menu</button>
-    </div>
-  </header>
+  const resumeLinks = {
+    da: { href: '#', labelEn: 'Download Data/BI Resume (PDF)', labelZh: '下载 数据/BI 简历（PDF）' },
+    ir: { href: '#', labelEn: 'Download IR/BD Resume (PDF)', labelZh: '下载 IR/BD 简历（PDF）' },
+  };
 
-  <main class="hero">
-    <div class="container grid">
-      <!-- Left column -->
-      <section id="about">
-        <h1>Data & Business Analytics</h1>
-        <p class="lead">I build growth‑ready analytics: KPI dashboards (MAU/DAU, funnels, anomaly alerts), cohort & retention models (SQL CTEs, window functions), and BI that partners with Marketing/BD to ship experiments and wins.</p>
-        <p class="lead">Previously @ Nurex Link LLC (SaaS/BI). 180+ data sources integrated; Power BI & Tableau; SQL/Python. MBA — Data Analytics.</p>
+  const email = 'clairesiwang@alphalink.com';
+
+  return (
+    <div className="min-h-screen bg-[#0b0b0b] text-neutral-200">
+      {/* Nav */}
+      <header className="sticky top-0 z-30 backdrop-blur bg-black/50 border-b border-white/10">
+        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+          <a href="#top" className="font-semibold tracking-wide text-yellow-400">ALPHA NEXUS</a>
+          <nav className="hidden md:flex gap-6 text-sm">
+            {nav.map(n => (
+              <a key={n.id} href={`#${n.id}`} className="hover:text-yellow-300 transition">{n.label}</a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-3">
+            <a
+              href={`mailto:${email}`}
+              className="text-sm px-3 py-1.5 rounded-xl border border-white/15 hover:border-yellow-400 hover:text-yellow-300 transition"
+            >{t('Email me', '邮件联系')}</a>
+            <button
+              onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
+              className="text-xs px-2 py-1 rounded-lg border border-white/15 hover:border-yellow-400 hover:text-yellow-300 transition"
+              aria-label="toggle language"
+            >{lang === 'en' ? '中文' : 'EN'}</button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section id="top" className="mx-auto max-w-6xl px-4 pt-14 pb-10">
+        <div className="grid md:grid-cols-12 gap-8 items-center">
+          <div className="md:col-span-7">
+            <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-yellow-300/90">
+              <span>Celeste (Claire) Wang</span>
+              <span className="opacity-50">·</span>
+              <span>{t('Data & Business Analytics · IR/BD', '数据与商业分析 · IR/BD')}</span>
+            </div>
+            <h1 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
+              {t('I turn messy data into decisions—and decisions into growth.', '我把杂乱数据变成决策，把决策转化为增长。')}
+            </h1>
+            <p className="mt-4 text-neutral-300/90 md:text-lg max-w-2xl">
+              {t(
+                'Dual-track professional across Data/BI and IR/BD. I build KPI systems, funnels, and investor narratives that leaders can trust.',
+                '双主线：数据/BI 与 IR/BD。我搭建 KPI 体系与漏斗，也搭建投资者叙事，供管理层迅速决策。'
+              )}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href={resumeLinks.da.href} className="px-4 py-2 rounded-2xl bg-yellow-400/90 text-black font-medium hover:bg-yellow-300 transition">
+                {lang === 'en' ? resumeLinks.da.labelEn : resumeLinks.da.labelZh}
+              </a>
+              <a href={resumeLinks.ir.href} className="px-4 py-2 rounded-2xl border border-white/15 hover:border-yellow-400 hover:text-yellow-300 transition">
+                {lang === 'en' ? resumeLinks.ir.labelEn : resumeLinks.ir.labelZh}
+              </a>
+            </div>
+            <div className="mt-6 flex gap-5 text-sm">
+              {socials.map(s => (
+                <a key={s.name} href={s.href} className="opacity-80 hover:opacity-100 hover:text-yellow-300 transition" target="_blank" rel="noreferrer">
+                  {s.name}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="md:col-span-5">
+            <div className="grid grid-cols-4 gap-3">
+              {metrics.map((m, i) => (
+                <div key={i} className="col-span-2 sm:col-span-2 rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="text-3xl font-semibold text-yellow-300">{m.value}</div>
+                  <div className="mt-1 text-xs text-neutral-300/80">
+                    {lang === 'en' ? m.labelEn : m.labelZh}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- Right column: Highlights card -->
-      <aside class="card" id="highlights">
-        <h2>Highlights</h2>
-        <ul>
-          <li>Built growth KPI dashboard (MAU, DAU, funnel, anomaly alerts) — reduced weekly prep from 6h to 10m.</li>
-          <li>Designed SQL models with CTEs & window functions for cohorts, retention, and incremental loads.</li>
-          <li>Partnered with Marketing/BD to translate insights into experiments and wins.</li>
-        </ul>
-        <p style="opacity:.82; margin-top:10px">Resume available on request.</p>
-        <div class="legend" aria-label="Traffic / Lead Mix (demo)">
-          <div class="chip"><span class="swatch org"></span><span>Organic</span></div>
-          <div class="chip"><span class="swatch paid"></span><span>Paid</span></div>
-          <div class="chip"><span class="swatch ref"></span><span>Referral</span></div>
-          <div class="chip"><span class="swatch dir"></span><span>Direct</span></div>
+      {/* About */}
+      <section id="about" className="mx-auto max-w-6xl px-4 py-10">
+        <div className="grid md:grid-cols-12 gap-8">
+          <div className="md:col-span-5">
+            <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('About', '关于我')}</h2>
+            <p className="mt-3 text-neutral-300/90">
+              {t(
+                'MBA (Data Analytics) with ~8 years across BI, growth analytics, and investor communications. I build practical systems: data contracts, KPI maps, dashboards, and concise narratives that move decisions forward.',
+                'MBA（数据分析方向），约 8 年覆盖 BI、增长分析与投资者沟通。我偏实用主义：数据契约、KPI 地图、可落地的看板与简洁叙事，推动决策落地。'
+              )}
+            </p>
+          </div>
+          <div className="md:col-span-7">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <ul className="space-y-2 text-sm text-neutral-300/90 list-disc list-inside">
+                <li>{t('Currently: Data Analyst @ Nurex Link (US).', '当前：Nurex Link（美国）数据分析师。')}</li>
+                <li>{t('Previously: Baidu (Commercial Analytics), BDP (BI), ThreatBook (security data), ByteDance (intern), Tianshan Capital (IR/analyst).', '此前：百度（商业分析）、BDP（BI）、威胁猎人（安全数据）、字节跳动（实习）、天善资本（IR/分析）。')}</li>
+                <li>{t('Tooling: SQL, Python, Power BI, Tableau, Excel, Salesforce CRM.', '工具：SQL、Python、Power BI、Tableau、Excel、Salesforce CRM。')}</li>
+                <li>{t('Focus: funnel/retention, GTM analytics, investor updates and materials.', '关注：漏斗/留存、GTM 分析、投资者更新与材料。')}</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </aside>
-    </div>
-  </main>
+      </section>
 
-  <!-- Skills -->
-  <section id="skills" class="section">
-    <div class="container">
-      <h2>Skills</h2>
-      <p class="lead" style="color:var(--muted)">SQL (CTEs, windows), Python (Pandas, NumPy), Power BI, Tableau, dbt (basic), Salesforce CRM, A/B testing, funnel analytics, anomaly detection.</p>
-    </div>
-  </section>
+      {/* Focus */}
+      <section id="focus" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('Focus', '专长')}</h2>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          {focusCards.map((c, i) => (
+            <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <div className="font-semibold text-lg">{lang === 'en' ? c.titleEn : c.titleZh}</div>
+              <ul className="mt-3 space-y-2 text-sm text-neutral-300/90 list-disc list-inside">
+                {(lang === 'en' ? c.bulletsEn : c.bulletsZh).map((b, j) => (
+                  <li key={j}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-  <!-- Projects -->
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Projects</h2>
-      <div class="card" style="margin-top:14px">
-        <p><strong>Growth KPI Dashboard</strong> — end‑to‑end dashboard connecting product & marketing metrics; alerting pipeline and executive weekly.</p>
-        <p style="color:var(--dim)">Stack: SQL, Python, Power BI / Tableau · Role: design, modeling, delivery.</p>
-      </div>
-    </div>
-  </section>
+      {/* Case Studies */}
+      <section id="cases" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('Case Studies', '项目案例')}</h2>
+        <div className="mt-6 grid md:grid-cols-3 gap-6">
+          {cases.map((c, i) => (
+            <article key={i} className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-white/0 p-6 flex flex-col">
+              <span className="text-xs uppercase tracking-wider text-yellow-300/90">{lang === 'en' ? c.tagEn : c.tagZh}</span>
+              <h3 className="mt-2 text-lg font-semibold">{lang === 'en' ? c.titleEn : c.titleZh}</h3>
+              <p className="mt-2 text-sm text-neutral-300/90">{lang === 'en' ? c.bodyEn : c.bodyZh}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {(lang === 'en' ? c.highlightsEn : c.highlightsZh).map((h, j) => (
+                  <span key={j} className="text-xs px-2 py-1 rounded-xl border border-white/10 bg-white/5">{h}</span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Contact</h2>
-      <div class="card" style="margin-top:14px">
-        <p>Open to Data/BI Analyst roles (onsite/hybrid — Bay Area & NYC; remote worldwide). IR/BD collaborations welcome.</p>
-        <p>Email: <a href="mailto:clairesiwang@alphalink.com">clairesiwang@alphalink.com</a> · LinkedIn: <a href="https://www.linkedin.com/in/clairesiwang" target="_blank" rel="noreferrer">/in/clairesiwang</a> · GitHub: <a href="https://github.com/clairesiwang" target="_blank" rel="noreferrer">@clairesiwang</a></p>
-      </div>
-    </div>
-  </section>
+      {/* Skills */}
+      <section id="skills" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('Skills', '技能栈')}</h2>
+        <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          {skills.map((s, i) => (
+            <div key={i} className="text-sm text-center px-3 py-2 rounded-xl border border-white/10 bg-white/5">
+              {s}
+            </div>
+          ))}
+        </div>
+      </section>
 
-  <footer>
-    <div class="container" style="display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap">
-      <span>© <span id="y"></span> Celeste (Claire) Wang</span>
-      <span style="color:var(--dim)">Hosted on GitHub Pages</span>
-    </div>
-  </footer>
+      {/* Experience */}
+      <section id="experience" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('Experience', '经历')}</h2>
+        <div className="mt-6 space-y-4">
+          {experience.map((e, i) => (
+            <div key={i} className="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="font-semibold text-lg">{e.company}</div>
+                <div className="text-xs text-neutral-300/70">{e.time}</div>
+              </div>
+              <div className="mt-1 text-sm text-neutral-200/95">
+                {lang === 'en' ? e.roleEn : e.roleZh}
+              </div>
+              <ul className="mt-3 space-y-2 text-sm text-neutral-300/90 list-disc list-inside">
+                {(lang === 'en' ? e.pointsEn : e.pointsZh).map((p, j) => (
+                  <li key={j}>{p}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-</body>
-</html>
+        {/* Publications */}
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold text-yellow-300">{t('Selected Writing', '部分写作')}</h3>
+          <div className="mt-3 grid md:grid-cols-2 gap-4">
+            {publications.map((p, i) => (
+              <a key={i} href={p.link} className="block rounded-2xl border border-white/10 bg-white/5 p-5 hover:border-yellow-400 hover:text-yellow-300 transition">
+                <div className="text-sm">{lang === 'en' ? p.titleEn : p.titleZh}</div>
+                <div className="mt-1 text-xs text-neutral-300/70">{p.date} · {lang === 'en' ? p.noteEn : p.noteZh}</div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="mx-auto max-w-6xl px-4 py-12">
+        <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-8 md:p-10">
+          <h2 className="text-2xl md:text-3xl font-semibold">
+            {t('Let’s build something measurable.', '一起做可度量的成果。')}
+          </h2>
+          <p className="mt-2 text-neutral-300/90 max-w-2xl">
+            {t('Prefer on-site roles in Singapore/Dubai and remote/hybrid roles in the US; open to investor-facing BD/IR with strong data rigor.', '优先：新加坡/迪拜 On-site，美国 Remote/Hybrid；欢迎面向投资者的 BD/IR 岗位，强调数据严谨。')}
+          </p>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <a href={`mailto:${email}`} className="px-4 py-2 rounded-2xl bg-yellow-400/90 text-black font-medium hover:bg-yellow-300 transition">
+              {t('Email', '邮件联系')}
+            </a>
+            <a href={resumeLinks.da.href} className="px-4 py-2 rounded-2xl border border-white/15 hover:border-yellow-400 hover:text-yellow-300 transition">
+              {lang === 'en' ? resumeLinks.da.labelEn : resumeLinks.da.labelZh}
+            </a>
+            <a href={resumeLinks.ir.href} className="px-4 py-2 rounded-2xl border border-white/15 hover:border-yellow-400 hover:text-yellow-300 transition">
+              {lang === 'en' ? resumeLinks.ir.labelEn : resumeLinks.ir.labelZh}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10">
+        <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-neutral-400 flex flex-wrap items-center justify-between gap-3">
+          <div>
+            © {new Date().getFullYear()} Celeste (Claire) Wang · {t('All rights reserved.', '保留所有权利。')}
+          </div>
+          <div className="flex gap-4">
+            {socials.map(s => (
+              <a key={s.name} href={s.href} target="_blank" rel="noreferrer" className="hover:text-yellow-300 transition">{s.name}</a>
+            ))}
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
