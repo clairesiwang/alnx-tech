@@ -168,6 +168,73 @@
         </div>
       </div>
     </section>
+    <!-- ==== Demos (paste below the closing </section> of #projects) ==== -->
+<!-- Chart.js CDN (只引一次) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<section id="demos" class="card" style="margin-top:28px">
+  <h2>Live Demos</h2>
+
+  <h3 style="margin:10px 0">Acquisition → Activation Funnel</h3>
+  <canvas id="funnel" height="120" aria-label="Acquisition to activation funnel"></canvas>
+  <p id="funnel-note" style="color:#c9c9c9;margin-top:6px"></p>
+
+  <h3 style="margin:18px 0 8px">Monthly Cohort Retention</h3>
+  <div id="cohort" style="display:grid;grid-template-columns:repeat(10,56px);gap:4px;font-size:12px"></div>
+
+  <h3 style="margin:18px 0 8px">Churn Prediction (Threshold)</h3>
+  <input id="thr" type="range" min="0.1" max="0.9" step="0.05" value="0.5" />
+  <span id="thrval">0.50</span>
+  <div id="metrics" style="margin-top:6px;color:#c9c9c9"></div>
+</section>
+
+<script>
+/* ---- 1) Funnel ---- */
+const steps = ["Landing","Signup","Email Verify","Activation"];
+const counts = [12000, 4800, 3600, 2100]; // synthetic
+new Chart(document.getElementById("funnel"), {
+  type: "bar",
+  data: { labels: steps, datasets: [{ label:"Users", data: counts }]},
+  options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+});
+const drops = counts.slice(0,-1).map((v,i)=>((v-counts[i+1])/v*100).toFixed(1));
+const maxDropIdx = drops.indexOf(Math.max(...drops.map(Number)).toFixed(1));
+document.getElementById("funnel-note").textContent =
+  `Biggest drop: ${steps[maxDropIdx]} → ${steps[maxDropIdx+1]} (${drops[maxDropIdx]}%).`;
+
+/* ---- 2) Cohort heatmap ---- */
+const months = ["Cohort","M1","M2","M3","M4","M5","M6","M7","M8","M9"];
+const data = [
+  ["2024-01",100,62,55,48,45,42,40,38,36],
+  ["2024-02",100,64,56,49,46,43,41,39,37],
+  ["2024-03",100,66,58,52,49,47,45,44,42]
+]; // %
+const grid = document.getElementById("cohort");
+months.forEach(h=>{ const c=document.createElement("div"); c.textContent=h; c.style.color="#c9c9c9"; grid.appendChild(c);});
+data.forEach(row=>{
+  row.forEach((v,i)=>{
+    const cell=document.createElement("div"); cell.style.textAlign="center"; cell.style.padding="6px 0";
+    if(i===0){ cell.textContent=row[0]; cell.style.color="#c9c9c9"; }
+    else { cell.textContent = v+"%"; const t=v/100; cell.style.background=`rgba(107,255,122,${0.15+0.6*t})`; cell.style.borderRadius="6px"; }
+    grid.appendChild(cell);
+  });
+});
+
+/* ---- 3) Churn threshold demo ---- */
+const scores=[0.9,0.8,0.7,0.65,0.6,0.55,0.5,0.45,0.4,0.35,0.3,0.2];
+const y=[1,1,1,0,1,0,0,0,0,0,0,0];
+function evaluate(t){
+  let tp=0,fp=0,fn=0,tn=0;
+  scores.forEach((s,i)=>{ const p = s>=t?1:0; if(p&&y[i])tp++; else if(p&&!y[i])fp++; else if(!p&&y[i])fn++; else tn++; });
+  const prec = tp/(tp+fp||1), rec = tp/(tp+fn||1), f1 = 2*prec*rec/(prec+rec||1);
+  document.getElementById("metrics").innerHTML =
+    `TP:${tp} FP:${fp} FN:${fn} TN:${tn} · Precision:${prec.toFixed(2)} · Recall:${rec.toFixed(2)} · F1:${f1.toFixed(2)}`;
+}
+const slider=document.getElementById("thr"); const show=document.getElementById("thrval");
+slider.addEventListener("input",()=>{ show.textContent=Number(slider.value).toFixed(2); evaluate(Number(slider.value));});
+evaluate(0.5);
+</script>
+<!-- ==== /Demos ==== -->
 
     <section id="contact">
       <h2>Contact</h2>
