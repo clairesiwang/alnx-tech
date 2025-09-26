@@ -24,74 +24,49 @@
     "jobTitle": "Data & Business Analyst",
     "url": "https://alnx.tech/",
     "sameAs": [
-      "https://www.linkedin.com/in/",
-      "https://github.com/"
+      "https://www.linkedin.com/in/",  
+      "https://github.com/clairesiwang"
     ]
   }
   </script>
 
   <style>
-    :root {
-      --bg: #0b0b0c;         /* black-gold aesthetic */
-      --panel: #121214;
-      --text: #e8e6e3;
-      --muted: #b3aea6;
-      --gold: #d4af37;
-      --accent: #8dc6ff;
-      --card: #161618;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
-      --radius: 16px;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
-    body { background: linear-gradient(180deg, var(--bg), #0e0e10 60%, #0b0b0c); color: var(--text); }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: 1040px; margin: 0 auto; padding: 28px 20px 80px; }
-
-    /* Header */
-    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0 24px; position: sticky; top: 0; background: rgba(11,11,12,0.7); backdrop-filter: blur(8px); z-index: 10; }
-    .brand { display: flex; align-items: center; gap: 14px; }
-    .logo { width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, var(--gold), #8e793e 60%, #403617); box-shadow: inset 0 0 20px rgba(0,0,0,0.4), var(--shadow); }
-    .title { font-size: 18px; letter-spacing: 0.4px; font-weight: 600; }
-    nav { display: flex; gap: 18px; }
-    nav a { color: var(--text); opacity: 0.9; }
-
-    /* Hero */
-    .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center; padding: 14px 0 28px; }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin: 0 0 14px; }
-    .hero p { color: var(--muted); font-size: 18px; margin: 0 0 20px; }
-    .badge { display: inline-block; padding: 6px 12px; border: 1px solid rgba(212,175,55,0.4); color: var(--gold); border-radius: 999px; font-size: 12px; letter-spacing: .6px; text-transform: uppercase; margin-bottom: 14px; }
-    .card { background: linear-gradient(180deg, var(--card), #151418); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; }
-    .hero .card { min-height: 220px; }
-    .kpilist { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    .kpi { background: #141418; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px; }
-    .kpi h3 { margin: 2px 0 4px; font-size: 22px; color: var(--gold); }
-    .kpi p { margin: 0; color: var(--muted); font-size: 12px; }
-
-    /* Sections */
-    section { margin-top: 48px; }
-    h2 { font-size: 22px; letter-spacing: .5px; margin: 0 0 14px; }
-    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
-    .col-6 { grid-column: span 6; }
-    .col-4 { grid-column: span 4; }
-    .pill { display: inline-block; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; margin: 6px 8px 0 0; font-size: 12px; color: var(--muted); }
-    .proj { padding: 18px; border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius); background: #141418; }
-    .proj h3 { margin: 0 0 8px; font-size: 18px; }
-    .proj p { margin: 0 0 10px; color: var(--muted); }
-    .proj a.btn { display:inline-block; padding: 8px 12px; border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; }
-
-    /* Footer */
-    footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); color: var(--muted); font-size: 13px; display:flex; justify-content: space-between; align-items: center; }
-    .social { display:flex; gap: 10px; }
-    .social a { color: var(--text); opacity: 0.9; border: 1px solid rgba(255,255,255,0.12); padding: 6px 10px; border-radius: 999px; }
-
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .kpilist { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: 1fr; }
-      .col-6, .col-4 { grid-column: span 1; }
-    }
+    :root { --bg:#0b0b0c; --panel:#121214; --text:#e8e6e3; --muted:#b3aea6; --gold:#d4af37; --accent:#8dc6ff; --card:#161618; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px; }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
+    body{background:linear-gradient(180deg,var(--bg),#0e0e10 60%,#0b0b0c);color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1040px;margin:0 auto;padding:28px 20px 80px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 24px;position:sticky;top:0;background:rgba(11,11,12,.7);backdrop-filter:blur(8px);z-index:10}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--gold),#8e793e 60%,#403617);box-shadow:inset 0 0 20px rgba(0,0,0,.4),var(--shadow)}
+    .title{font-size:18px;letter-spacing:.4px;font-weight:600}
+    nav{display:flex;gap:18px}
+    nav a{color:var(--text);opacity:.9}
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:14px 0 28px}
+    .hero h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 14px}
+    .hero p{color:var(--muted);font-size:18px;margin:0 0 20px}
+    .badge{display:inline-block;padding:6px 12px;border:1px solid rgba(212,175,55,.4);color:var(--gold);border-radius:999px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px}
+    .card{background:linear-gradient(180deg,var(--card),#151418);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+    .kpilist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .kpi{background:#141418;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px}
+    .kpi h3{margin:2px 0 4px;font-size:22px;color:var(--gold)}
+    .kpi p{margin:0;color:var(--muted);font-size:12px}
+    section{margin-top:48px}
+    h2{font-size:22px;letter-spacing:.5px;margin:0 0 14px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .col-6{grid-column:span 6}
+    .col-4{grid-column:span 4}
+    .pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;margin:6px 8px 0 0;font-size:12px;color:var(--muted)}
+    .proj{padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:#141418}
+    .proj h3{margin:0 0 8px;font-size:18px}
+    .proj p{margin:0 0 10px;color:var(--muted)}
+    .proj a.btn{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:10px}
+    footer{margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
+    .social{display:flex;gap:10px}
+    .social a{color:var(--text);opacity:.9;border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px}
+    @media (max-width:860px){.hero{grid-template-columns:1fr}.kpilist{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.col-6,.col-4{grid-column:span 1}}
   </style>
 </head>
 <body>
@@ -143,9 +118,7 @@
             在百度做商业分析时支持广告与增长，在 Nurex 负责 BI 数据模型与仪表盘；
             熟悉自上而下的 KPI 设计、跨部门协作与指标落地。
           </p>
-          <p>
-            近期关注：自动化数据质量监控、转化漏斗归因、留存与分群、及 AI 辅助分析。
-          </p>
+          <p>近期关注：自动化数据质量监控、转化漏斗归因、留存与分群、及 AI 辅助分析。</p>
         </div>
         <div class="col-6 card">
           <h3 style="margin-top:0">Focus Areas</h3>
@@ -201,7 +174,7 @@
       <div class="card">
         <p style="margin:0 0 8px">Email: <a href="mailto:clairesiwang@alphalink.com">clairesiwang@alphalink.com</a></p>
         <p style="margin:0 0 8px">GitHub: <a href="https://github.com/clairesiwang" target="_blank" rel="noopener">github.com/clairesiwang</a></p>
-        <p style="margin:0">LinkedIn: <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">linkedin.com/in/</a></p>
+        <p style="margin:0">LinkedIn: <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">linkedin.com/in/your-handle</a></p>
       </div>
     </section>
 
@@ -215,8 +188,6 @@
     </footer>
   </div>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 </body>
 </html>
