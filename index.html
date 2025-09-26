@@ -261,6 +261,34 @@ evaluate(0.5);
   </div>
 
   <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+  <script>
+(function(){
+  function ensureChart(cb){
+    if (window.Chart) return cb();
+    const s=document.createElement('script');
+    s.src='https://cdn.jsdelivr.net/npm/chart.js';
+    s.onload=cb;
+    document.head.appendChild(s);
+  }
+  ensureChart(function(){
+    const el=document.getElementById('leadMix');
+    if(!el) return;
+    const palette=['#d4af37','#6BFF7A','#8dc6ff','#444444'];
+    let data=[42,25,18,15];
+    const chart=new Chart(el,{type:'doughnut',
+      data:{labels:['Organic','Paid','Referral','Direct'],
+            datasets:[{data,backgroundColor:palette,borderWidth:0}]},
+      options:{responsive:true,cutout:'62%',
+        plugins:{legend:{display:true,labels:{color:getComputedStyle(document.documentElement).getPropertyValue('--text')||'#fff'}}},
+        animation:{duration:900,easing:'easeOutQuart'}}});
+    setInterval(()=>{ const jitter=data.map(v=>Math.max(5, v+(Math.random()*4-2)));
+      const sum=jitter.reduce((a,b)=>a+b,0); data=jitter.map(v=>+(v/sum*100).toFixed(1));
+      chart.data.datasets[0].data=data; chart.update('active'); },3500);
+  });
+})();
+</script>
+
 </body>
 </html>
 
