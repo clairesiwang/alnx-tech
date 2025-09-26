@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 
 // Single-file React component for a bilingual (EN/中文) personal site
 // TailwindCSS ready. Clean, minimal, black–gold aesthetic.
@@ -13,6 +14,7 @@ export default function PersonalSite() {
   const nav = [
     { id: 'about', label: t('About', '关于我') },
     { id: 'focus', label: t('Focus', '专长') },
+    { id: 'demo', label: t('Analytics Demo', '分析演示') },
     { id: 'cases', label: t('Case Studies', '项目案例') },
     { id: 'skills', label: t('Skills', '技能栈') },
     { id: 'experience', label: t('Experience', '经历') },
@@ -41,34 +43,6 @@ export default function PersonalSite() {
         'CRM/ERP 数据、销售漏斗治理、GTM 指标',
       ],
     },
-    {
-      titleEn: 'IR / BD',
-      titleZh: '投资者关系 / 商务拓展',
-      bulletsEn: [
-        'Investor communications, updates, and materials',
-        'Cross-border capital dialogues, light DD support',
-        'Storytelling: metrics → narrative → trust',
-      ],
-      bulletsZh: [
-        '投资者沟通、周/月度更新与材料制作',
-        '跨境资本对接，尽调辅助',
-        '故事化表达：指标 → 叙事 → 信任',
-      ],
-    },
-    {
-      titleEn: 'Web3 / DeFi Intelligence',
-      titleZh: 'Web3 / DeFi 洞察',
-      bulletsEn: [
-        'On-chain heuristics, airdrop/staking playbooks',
-        'DEX liquidity views, basic arbitrage structures',
-        'Research → systematize → iterate',
-      ],
-      bulletsZh: [
-        '链上启发式、空投/质押策略',
-        'DEX 流动性视角与基础套利结构',
-        '研究 → 结构化 → 迭代',
-      ],
-    },
   ];
 
   const cases = [
@@ -95,18 +69,6 @@ export default function PersonalSite() {
         '与各业务线协作沉淀 KPI、埋点与自助看板，服务管理与运营节奏；显著缩短决策周期。',
       highlightsEn: ['Tableau · SQL', 'Self-serve KPI portal', 'Ops/exec cadence'],
       highlightsZh: ['Tableau · SQL', '自助 KPI 门户', '运营/管理节奏'],
-    },
-    {
-      tagEn: 'Tianshan Capital — IR/Analyst',
-      tagZh: '天善资本 — IR/分析',
-      titleEn: 'Investor updates & deal support',
-      titleZh: '投资者更新与交易支持',
-      bodyEn:
-        'Maintained investor briefs, drafted memos and pitch materials, and supported cross-border dialogues; improved response quality and speed.',
-      bodyZh:
-        '维护投资者简报，撰写备忘录与路演材料，支持跨境沟通；提升反馈质量与响应速度。',
-      highlightsEn: ['IR materials', 'Light DD', 'Cross-border comms'],
-      highlightsZh: ['IR 材料', '轻尽调', '跨境沟通'],
     },
   ];
 
@@ -228,12 +190,31 @@ export default function PersonalSite() {
     { name: 'YouTube', href: 'https://www.youtube.com/@alphanexus' },
   ];
 
+  // Demo datasets for charts (replace with live data later)
+  const chartData = [
+    { month: 'Jan', users: 120, signups: 42 },
+    { month: 'Feb', users: 150, signups: 60 },
+    { month: 'Mar', users: 210, signups: 75 },
+    { month: 'Apr', users: 280, signups: 110 },
+    { month: 'May', users: 340, signups: 130 },
+    { month: 'Jun', users: 390, signups: 160 },
+  ];
+
+  const pieData = [
+    { name: 'Organic', value: 45 },
+    { name: 'Paid', value: 25 },
+    { name: 'Referral', value: 18 },
+    { name: 'Direct', value: 12 },
+  ];
+
+  const PIE_COLORS = ['#facc15', '#a3a3a3', '#f59e0b', '#d4d4d4'];
+
   const resumeLinks = {
     da: { href: '#', labelEn: 'Download Data/BI Resume (PDF)', labelZh: '下载 数据/BI 简历（PDF）' },
     ir: { href: '#', labelEn: 'Download IR/BD Resume (PDF)', labelZh: '下载 IR/BD 简历（PDF）' },
   };
 
-  const email = 'clairesiwang@alphalink.com';
+  const email = 'celeste.siwang@gmail.com';
 
   return (
     <div className="min-h-screen bg-[#0b0b0b] text-neutral-200">
@@ -267,7 +248,7 @@ export default function PersonalSite() {
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-yellow-300/90">
               <span>Celeste (Claire) Wang</span>
               <span className="opacity-50">·</span>
-              <span>{t('Data & Business Analytics · IR/BD', '数据与商业分析 · IR/BD')}</span>
+              <span>{t('Data & Business Analytics', '数据与商业分析')}</span>
             </div>
             <h1 className="mt-3 text-3xl md:text-5xl font-semibold leading-tight">
               {t('I turn messy data into decisions—and decisions into growth.', '我把杂乱数据变成决策，把决策转化为增长。')}
@@ -351,6 +332,44 @@ export default function PersonalSite() {
         </div>
       </section>
 
+      {/* Analytics Demo */}
+      <section id="demo" className="mx-auto max-w-6xl px-4 py-10">
+        <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('Analytics Demo', '分析演示')}</h2>
+        <div className="mt-6 grid md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="text-sm font-semibold mb-3">{t('Monthly Users & Signups', '月度用户与注册')}</div>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={chartData} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="users" stroke="#facc15" strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="signups" stroke="#9ca3af" strokeWidth={2} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <div className="text-sm font-semibold mb-3">{t('Acquisition Split', '获客渠道占比')}</div>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={90} innerRadius={45}>
+                    {pieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Case Studies */}
       <section id="cases" className="mx-auto max-w-6xl px-4 py-10">
         <h2 className="text-xl md:text-2xl font-semibold text-yellow-300">{t('Case Studies', '项目案例')}</h2>
@@ -425,7 +444,7 @@ export default function PersonalSite() {
             {t('Let’s build something measurable.', '一起做可度量的成果。')}
           </h2>
           <p className="mt-2 text-neutral-300/90 max-w-2xl">
-            {t('Prefer on-site roles in Singapore/Dubai and remote/hybrid roles in the US; open to investor-facing BD/IR with strong data rigor.', '优先：新加坡/迪拜 On-site，美国 Remote/Hybrid；欢迎面向投资者的 BD/IR 岗位，强调数据严谨。')}
+            {t('{t('Open to data/BI roles (US remote/hybrid; SG/Dubai on-site). I turn data into decisions stakeholders can trust.', '开放数据/BI 岗位（美国 Remote/Hybrid；新加坡/迪拜 On-site）。用数据支撑可被信任的决策。')}
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a href={`mailto:${email}`} className="px-4 py-2 rounded-2xl bg-yellow-400/90 text-black font-medium hover:bg-yellow-300 transition">
