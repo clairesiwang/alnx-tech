@@ -7,7 +7,7 @@
   <meta name="description" content="Portfolio of Celeste (Claire) Wang — Data & Business Analyst. SQL, Python, Power BI, Tableau. Growth & KPI dashboards, churn analysis, funnel analytics." />
   <meta name="author" content="Celeste (Claire) Wang" />
   <link rel="canonical" href="https://alnx.tech/" />
-  
+
   <!-- Open Graph -->
   <meta property="og:title" content="Celeste (Claire) Wang — Data & Business Analytics" />
   <meta property="og:description" content="SQL · Python · Power BI · Tableau | Growth & KPI Insights | Portfolio & Contact" />
@@ -15,58 +15,99 @@
   <meta property="og:url" content="https://alnx.tech/" />
   <meta property="og:image" content="https://alnx.tech/og-image.jpg" />
 
-  <!-- JSON-LD: Person -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Celeste (Claire) Wang",
-    "jobTitle": "Data & Business Analyst",
-    "url": "https://alnx.tech/",
-    "sameAs": [
-      "https://www.linkedin.com/in/",
-      "https://github.com/clairesiwang"
-    ]
-  }
+  {"@context":"https://schema.org","@type":"Person","name":"Celeste (Claire) Wang","jobTitle":"Data & Business Analyst","url":"https://alnx.tech/","sameAs":["https://www.linkedin.com/in/","https://github.com/clairesiwang"]}
   </script>
 
+  <!-- Chart.js（全站只引一次） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
-    :root { --bg:#0b0b0c; --panel:#121214; --text:#e8e6e3; --muted:#b3aea6; --gold:#d4af37; --accent:#8dc6ff; --card:#161618; --shadow:0 10px 30px rgba(0,0,0,.35); --radius:16px; }
+    :root{
+      --bg:#0b0b0c; --panel:#101012; --text:#eceae7; --muted:#b7b3ab; 
+      --gold:#d4af37; --gold2:#b9922b; --accent:#8dc6ff; --lime:#6BFF7A;
+      --card:#141418; --shadow:0 12px 36px rgba(0,0,0,.42); --radius:18px;
+      --border-grad:linear-gradient(135deg,rgba(212,175,55,.65),rgba(141,198,255,.35));
+    }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji"}
-    body{background:linear-gradient(180deg,var(--bg),#0e0e10 60%,#0b0b0c);color:var(--text)}
+    html{scroll-behavior:smooth}
+    html,body{margin:0;padding:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--text);background:#0a0a0b}
+    body{background:
+      radial-gradient(1200px 700px at 10% -10%,rgba(212,175,55,.12),transparent 55%),
+      radial-gradient(900px 600px at 95% 10%,rgba(141,198,255,.08),transparent 60%),
+      linear-gradient(180deg,#0b0b0c 0%,#0c0c0d 55%,#0a0a0b 100%);
+    }
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1040px;margin:0 auto;padding:28px 20px 80px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0 24px;position:sticky;top:0;background:rgba(11,11,12,.7);backdrop-filter:blur(8px);z-index:10}
+    .container{max-width:1100px;margin:0 auto;padding:26px 20px 80px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0 20px;position:sticky;top:0;background:rgba(10,10,11,.55);backdrop-filter:blur(10px);z-index:50}
     .brand{display:flex;align-items:center;gap:14px}
-    .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--gold),#8e793e 60%,#403617);box-shadow:inset 0 0 20px rgba(0,0,0,.4),var(--shadow)}
+    .logo{width:40px;height:40px;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--gold),#8e793e 60%,#3b3217);box-shadow:inset 0 0 20px rgba(0,0,0,.4),0 6px 18px rgba(0,0,0,.35)}
     .title{font-size:18px;letter-spacing:.4px;font-weight:600}
-    nav{display:flex;gap:18px}
-    nav a{color:var(--text);opacity:.9}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:14px 0 28px}
-    .hero h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 14px}
+    nav{display:flex;gap:20px}
+    nav a{color:var(--text);opacity:.92;position:relative}
+    nav a:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.9),transparent);transform:scaleX(0);transform-origin:center;transition:transform .28s}
+    nav a:hover:after{transform:scaleX(1)}
+
+    /* Common cards */
+    .card{
+      background:linear-gradient(180deg,var(--card),#16161a);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      position:relative;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .card.is-glass{
+      background:linear-gradient(180deg,rgba(22,22,26,.85),rgba(18,18,22,.78));
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .card:hover{transform:translateY(-2px);transition:transform .25s ease}
+
+    .badge{display:inline-block;padding:6px 12px;border:1px solid rgba(212,175,55,.5);color:var(--gold);border-radius:999px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px;background:rgba(212,175,55,.06)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:start;padding:18px 0 28px;position:relative}
+    .hero h1{font-size:clamp(30px,4vw,48px);line-height:1.15;margin:0 0 14px}
     .hero p{color:var(--muted);font-size:18px;margin:0 0 20px}
-    .badge{display:inline-block;padding:6px 12px;border:1px solid rgba(212,175,55,.4);color:var(--gold);border-radius:999px;font-size:12px;letter-spacing:.6px;text-transform:uppercase;margin-bottom:14px}
-    .card{background:linear-gradient(180deg,var(--card),#151418);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
     .kpilist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .kpi{background:#141418;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px}
-    .kpi h3{margin:2px 0 4px;font-size:22px;color:var(--gold)}
+    .kpi{background:linear-gradient(180deg,#151519,#141418);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:14px}
+    .kpi h3{margin:2px 0 6px;font-size:24px;color:var(--gold)}
     .kpi p{margin:0;color:var(--muted);font-size:12px}
-    section{margin-top:48px}
+    .glow{position:absolute;inset:-80px -40px auto auto;pointer-events:none;filter:blur(60px);width:36vw;max-width:520px;height:36vw;max-height:520px;background:
+      radial-gradient(closest-side,rgba(212,175,55,.22),transparent 65%),
+      radial-gradient(closest-side,rgba(141,198,255,.12),transparent 70%);opacity:.75}
+
+    section{margin-top:54px}
     h2{font-size:22px;letter-spacing:.5px;margin:0 0 14px}
+
     .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
     .col-6{grid-column:span 6}
     .col-4{grid-column:span 4}
-    .pill{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.08);border-radius:999px;margin:6px 8px 0 0;font-size:12px;color:var(--muted)}
-    .proj{padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:#141418}
+
+    .proj{padding:18px;border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);background:linear-gradient(180deg,#151519,#141418)}
     .proj h3{margin:0 0 8px;font-size:18px}
     .proj p{margin:0 0 10px;color:var(--muted)}
-    .proj a.btn{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:10px}
+    .btn{display:inline-block;padding:8px 12px;border:1px solid rgba(255,255,255,.15);border-radius:10px;color:var(--text)}
+
     footer{margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center}
     .social{display:flex;gap:10px}
     .social a{color:var(--text);opacity:.9;border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px}
-    @media (max-width:860px){.hero{grid-template-columns:1fr}.kpilist{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.col-6,.col-4{grid-column:span 1}}
+
+    /* Reveal */
+    .reveal{opacity:0;transform:translateY(10px);transition:all .6s ease}
+    .reveal.on{opacity:1;transform:none}
+
+    @media (max-width:960px){
+      .hero{grid-template-columns:1fr}
+      .kpilist{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .col-6,.col-4{grid-column:span 1}
+      .glow{display:none}
+    }
   </style>
 </head>
 <body>
@@ -77,87 +118,46 @@
         <div class="title">Celeste (Claire) Wang</div>
       </div>
       <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
+        <a href="#demos">Demos</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
+    <!-- ===== Hero ===== -->
     <section class="hero">
-      <div>
+      <div class="glow" aria-hidden="true"></div>
+
+      <div class="reveal on">
         <span class="badge">Data & Business Analytics</span>
         <h1>SQL · Python · Power BI · Tableau — Turning data into growth & clear decisions.</h1>
-        <p>
-          I build KPI & funnel dashboards, churn models, and automated reporting that help teams
-          spot bottlenecks fast and act with confidence. Previously at Baidu (商业分析) and now at Nurex Link LLC (SaaS/BI), integrating 180+ data sources and improving tracked conversion by ~35%.
-        </p>
+        <p>I build KPI & funnel dashboards, churn models, and automated reporting that help teams
+          spot bottlenecks fast and act with confidence. Previously at Baidu (商业分析) and now at Nurex Link LLC (SaaS/BI), integrating 180+ sources and improving tracked conversion by ~35%.</p>
+
         <div class="kpilist">
-          <div class="kpi"><h3>180+</h3><p>Integrated data sources</p></div>
-          <div class="kpi"><h3>~35%</h3><p>Conversion lift tracked</p></div>
-          <div class="kpi"><h3>&lt; 2h</h3><p>Refresh latency (BI)</p></div>
+          <div class="kpi"><h3 data-counter="180">0</h3><p>Integrated data sources</p></div>
+          <div class="kpi"><h3 data-counter="35" data-suffix="%">0%</h3><p>Conversion lift tracked</p></div>
+          <div class="kpi"><h3 data-counter="2" data-prefix="< " data-suffix="h">&lt; 2h</h3><p>Refresh latency (BI)</p></div>
         </div>
       </div>
-      <div class="card">
+
+      <div class="card is-glass reveal">
         <h2 style="margin-top:0">Highlights</h2>
-        <ul>
+        <ul style="margin:0 0 12px 18px">
           <li>Built growth KPI dashboard (MAU, DAU, funnel, anomaly alerts) — reduced weekly prep from 6h to 10m.</li>
           <li>Designed SQL models with CTEs & window functions for cohorts, retention, and incremental loads.</li>
           <li>Partnered with Marketing/BD to translate insights into experiments and wins.</li>
         </ul>
-        <p style="margin-top:10px;color:var(--muted)">Resume available on request.</p>
-
-        <!-- Mini viz inside hero card -->
         <div class="viz" style="margin-top:14px">
           <h3 style="margin:0 0 8px;font-size:16px">Traffic / Lead Mix (demo)</h3>
-          <canvas id="leadMix" height="140"
-                  style="width:100%;max-width:420px;min-height:140px;display:block"
-                  aria-label="Traffic and lead mix doughnut chart"></canvas>
+          <canvas id="leadMix" style="width:100%;max-width:420px;height:240px;display:block" aria-label="Traffic and lead mix"></canvas>
           <p style="margin:6px 0 0;color:var(--muted);font-size:12px">Synthetic demo · updates periodically</p>
         </div>
       </div>
     </section>
 
-    <section id="about">
-      <h2>About</h2>
-      <div class="grid">
-        <div class="col-6 card">
-          <p>
-            我专注把<span style="color:var(--gold)">复杂数据 → 清晰指标 → 可执行方案</span>。
-            在百度做商业分析时支持广告与增长，在 Nurex 负责 BI 数据模型与仪表盘；
-            熟悉自上而下的 KPI 设计、跨部门协作与指标落地。
-          </p>
-          <p>近期关注：自动化数据质量监控、转化漏斗归因、留存与分群、及 AI 辅助分析。</p>
-        </div>
-        <div class="col-6 card">
-          <h3 style="margin-top:0">Focus Areas</h3>
-          <ul>
-            <li>Growth analytics (acquisition, activation, retention, revenue)</li>
-            <li>Funnel & cohort analysis, churn modeling</li>
-            <li>Power BI/Tableau dashboards & automated refresh</li>
-            <li>SQL data modeling, data quality checks, documentation</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <h2>Skills</h2>
-      <div class="card">
-        <span class="pill">SQL (Postgres/MySQL)</span>
-        <span class="pill">Python (Pandas, NumPy)</span>
-        <span class="pill">Power BI</span>
-        <span class="pill">Tableau</span>
-        <span class="pill">Excel (Pivot, PowerQuery)</span>
-        <span class="pill">Data Modeling</span>
-        <span class="pill">Cohort/Retention</span>
-        <span class="pill">Funnel Analytics</span>
-        <span class="pill">A/B basics</span>
-        <span class="pill">Stakeholder Comms</span>
-      </div>
-    </section>
-
-    <section id="projects">
+    <!-- ===== Projects ===== -->
+    <section id="projects" class="reveal">
       <h2>Projects</h2>
       <div class="grid">
         <div class="col-4 proj">
@@ -178,15 +178,12 @@
       </div>
     </section>
 
-    <!-- ==== Demos ==== -->
-    <!-- Chart.js CDN（给下方 Demos 与上方 doughnut 共用） -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <section id="demos" class="card" style="margin-top:28px">
+    <!-- ===== Demos + Contact ===== -->
+    <section id="demos" class="card reveal" style="margin-top:32px">
       <h2>Live Demos</h2>
 
       <h3 style="margin:10px 0">Acquisition → Activation Funnel</h3>
-      <canvas id="funnel" height="120" aria-label="Acquisition to activation funnel"></canvas>
+      <canvas id="funnel" height="120"></canvas>
       <p id="funnel-note" style="color:#c9c9c9;margin-top:6px"></p>
 
       <h3 style="margin:18px 0 8px">Monthly Cohort Retention</h3>
@@ -198,55 +195,7 @@
       <div id="metrics" style="margin-top:6px;color:#c9c9c9"></div>
     </section>
 
-    <script>
-    /* ---- 1) Funnel ---- */
-    const steps = ["Landing","Signup","Email Verify","Activation"];
-    const counts = [12000, 4800, 3600, 2100]; // synthetic
-    new Chart(document.getElementById("funnel"), {
-      type: "bar",
-      data: { labels: steps, datasets: [{ label:"Users", data: counts }]},
-      options: { plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
-    });
-    const drops = counts.slice(0,-1).map((v,i)=>((v-counts[i+1])/v*100).toFixed(1));
-    const maxDropIdx = drops.indexOf(Math.max(...drops.map(Number)).toFixed(1));
-    document.getElementById("funnel-note").textContent =
-      `Biggest drop: ${steps[maxDropIdx]} → ${steps[maxDropIdx+1]} (${drops[maxDropIdx]}%).`;
-
-    /* ---- 2) Cohort heatmap ---- */
-    const months = ["Cohort","M1","M2","M3","M4","M5","M6","M7","M8","M9"];
-    const data = [
-      ["2024-01",100,62,55,48,45,42,40,38,36],
-      ["2024-02",100,64,56,49,46,43,41,39,37],
-      ["2024-03",100,66,58,52,49,47,45,44,42]
-    ]; // %
-    const grid = document.getElementById("cohort");
-    months.forEach(h=>{ const c=document.createElement("div"); c.textContent=h; c.style.color="#c9c9c9"; grid.appendChild(c);});
-    data.forEach(row=>{
-      row.forEach((v,i)=>{
-        const cell=document.createElement("div"); cell.style.textAlign="center"; cell.style.padding="6px 0";
-        if(i===0){ cell.textContent=row[0]; cell.style.color="#c9c9c9"; }
-        else { cell.textContent = v+"%"; const t=v/100; cell.style.background=`rgba(107,255,122,${0.15+0.6*t})`; cell.style.borderRadius="6px"; }
-        grid.appendChild(cell);
-      });
-    });
-
-    /* ---- 3) Churn threshold demo ---- */
-    const scores=[0.9,0.8,0.7,0.65,0.6,0.55,0.5,0.45,0.4,0.35,0.3,0.2];
-    const y=[1,1,1,0,1,0,0,0,0,0,0,0];
-    function evaluate(t){
-      let tp=0,fp=0,fn=0,tn=0;
-      scores.forEach((s,i)=>{ const p = s>=t?1:0; if(p&&y[i])tp++; else if(p&&!y[i])fp++; else if(!p&&y[i])fn++; else tn++; });
-      const prec = tp/(tp+fp||1), rec = tp/(tp+fn||1), f1 = 2*prec*rec/(prec+rec||1);
-      document.getElementById("metrics").innerHTML =
-        `TP:${tp} FP:${fp} FN:${fn} TN:${tn} · Precision:${prec.toFixed(2)} · Recall:${rec.toFixed(2)} · F1:${f1.toFixed(2)}`;
-    }
-    const slider=document.getElementById("thr"); const show=document.getElementById("thrval");
-    slider.addEventListener("input",()=>{ show.textContent=Number(slider.value).toFixed(2); evaluate(Number(slider.value));});
-    evaluate(0.5);
-    </script>
-    <!-- ==== /Demos ==== -->
-
-    <section id="contact">
+    <section id="contact" class="reveal">
       <h2>Contact</h2>
       <div class="card">
         <p style="margin:0 0 8px">Email: <a href="mailto:celeste.siwang@alphalink.com">celeste.siwang@alphalink.com</a></p>
@@ -258,49 +207,105 @@
     <footer>
       <div>© <span id="y"></span> Celeste (Claire) Wang · alnx.tech</div>
       <div class="social">
-        <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#demos">Demos</a>
         <a href="#contact">Contact</a>
       </div>
     </footer>
   </div>
 
-  <!-- year -->
-  <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <!-- Year -->
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 
-  <!-- Doughnut init: runs after DOM & Chart.js are ready -->
+  <!-- Reveal on scroll + KPI counters -->
   <script>
-  document.addEventListener('DOMContentLoaded', function(){
-    const el = document.getElementById('leadMix');
-    if (!el || !window.Chart) return;
-
-    const palette = ['#d4af37', '#6BFF7A', '#8dc6ff', '#444444'];
-    let data = [42, 25, 18, 15]; // demo
-
-    const chart = new Chart(el.getContext('2d'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Organic','Paid','Referral','Direct'],
-        datasets: [{ data, backgroundColor: palette, borderWidth: 0 }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        cutout: '62%',
-        plugins: { legend: { labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text') || '#fff' } } },
-        animation: { duration: 900, easing: 'easeOutQuart' }
-      }
-    });
-
-    setInterval(() => {
-      const jitter = data.map(v => Math.max(5, v + (Math.random() * 4 - 2)));
-      const sum = jitter.reduce((a,b)=>a+b,0);
-      data = jitter.map(v => +(v / sum * 100).toFixed(1));
-      chart.data.datasets[0].data = data;
-      chart.update('active');
-    }, 3500);
-  });
+    // reveal
+    const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.15});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    // counters
+    const nums=[...document.querySelectorAll('[data-counter]')];
+    const nIO=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting) return;
+        const el=e.target, target=+el.dataset.counter, dur=900, start=performance.now();
+        const prefix=el.dataset.prefix||'', suffix=el.dataset.suffix||'';
+        function tick(t){const p=Math.min(1,(t-start)/dur), v=Math.round(target*p); el.textContent=prefix+v+suffix; if(p<1) requestAnimationFrame(tick);}
+        requestAnimationFrame(tick); nIO.unobserve(el);
+      });
+    },{threshold:.6});
+    nums.forEach(el=>nIO.observe(el));
   </script>
 
+  <!-- Charts -->
+  <script>
+    // Doughnut (hero)
+    (function(){
+      const el=document.getElementById('leadMix');
+      if(!el || !window.Chart) return;
+      const palette=['#d4af37','#6BFF7A','#8dc6ff','#444444'];
+      let data=[42,25,18,15];
+
+      const chart=new Chart(el.getContext('2d'),{
+        type:'doughnut',
+        data:{labels:['Organic','Paid','Referral','Direct'],datasets:[{data,backgroundColor:palette,borderWidth:0}]},
+        options:{
+          responsive:true, maintainAspectRatio:true, aspectRatio:1, cutout:'62%',
+          plugins:{legend:{labels:{color:getComputedStyle(document.documentElement).getPropertyValue('--text')||'#fff'}}},
+          animation:{duration:900,easing:'easeOutQuart'}
+        }
+      });
+      setInterval(()=>{
+        const j=data.map(v=>Math.max(5,v+(Math.random()*4-2)));
+        const sum=j.reduce((a,b)=>a+b,0); data=j.map(v=>+(v/sum*100).toFixed(1));
+        chart.data.datasets[0].data=data; chart.update('active');
+      },3500);
+    })();
+
+    // Bar funnel
+    (function(){
+      const steps=["Landing","Signup","Email Verify","Activation"];
+      const counts=[12000,4800,3600,2100];
+      new Chart(document.getElementById("funnel"),{
+        type:"bar",
+        data:{labels:steps,datasets:[{label:"Users",data:counts}]},
+        options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+      });
+      const drops=counts.slice(0,-1).map((v,i)=>((v-counts[i+1])/v*100).toFixed(1));
+      const maxDropIdx=drops.indexOf(Math.max(...drops.map(Number)).toFixed(1));
+      document.getElementById("funnel-note").textContent =
+        `Biggest drop: ${steps[maxDropIdx]} → ${steps[maxDropIdx+1]} (${drops[maxDropIdx]}%).`;
+    })();
+
+    // Cohort heatmap
+    (function(){
+      const months=["Cohort","M1","M2","M3","M4","M5","M6","M7","M8","M9"];
+      const data=[["2024-01",100,62,55,48,45,42,40,38,36],["2024-02",100,64,56,49,46,43,41,39,37],["2024-03",100,66,58,52,49,47,45,44,42]];
+      const grid=document.getElementById("cohort");
+      months.forEach(h=>{const c=document.createElement("div");c.textContent=h;c.style.color="#c9c9c9";grid.appendChild(c)});
+      data.forEach(row=>{
+        row.forEach((v,i)=>{
+          const cell=document.createElement("div");cell.style.textAlign="center";cell.style.padding="6px 0";
+          if(i===0){cell.textContent=row[0];cell.style.color="#c9c9c9";}
+          else{cell.textContent=v+"%";const t=v/100;cell.style.background=`rgba(107,255,122,${0.15+0.6*t})`;cell.style.borderRadius="6px";}
+          grid.appendChild(cell);
+        });
+      });
+    })();
+
+    // Churn threshold
+    (function(){
+      const scores=[0.9,0.8,0.7,0.65,0.6,0.55,0.5,0.45,0.4,0.35,0.3,0.2];
+      const y=[1,1,1,0,1,0,0,0,0,0,0,0];
+      const slider=document.getElementById("thr"); const show=document.getElementById("thrval"); const m=document.getElementById("metrics");
+      function evalT(t){
+        let tp=0,fp=0,fn=0,tn=0;
+        scores.forEach((s,i)=>{const p=s>=t?1:0; if(p&&y[i])tp++; else if(p&&!y[i])fp++; else if(!p&&y[i])fn++; else tn++;});
+        const prec=tp/(tp+fp||1), rec=tp/(tp+fn||1), f1=2*prec*rec/(prec+rec||1);
+        m.innerHTML=`TP:${tp} FP:${fp} FN:${fn} TN:${tn} · Precision:${prec.toFixed(2)} · Recall:${rec.toFixed(2)} · F1:${f1.toFixed(2)}`;
+      }
+      slider.addEventListener("input",()=>{show.textContent=Number(slider.value).toFixed(2);evalT(Number(slider.value));});
+      evalT(0.5);
+    })();
+  </script>
 </body>
 </html>
